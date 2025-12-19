@@ -1,0 +1,25 @@
+---
+- name: Provision VM for Employee System
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure apt cache is up to date
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: ["docker.io", "python3-pip", "apt-transport-https", "ca-certificates"]
+        state: present
+
+    - name: Install pip packages
+      pip:
+        name: ["docker", "ansible"]
+
+    - name: Ensure docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+# Additional tasks: install kubectl, kubeadm, containerd as needed

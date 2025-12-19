@@ -1,0 +1,13 @@
+{
+  "name": "employee-index",
+  "version": "0.1.0",
+  "description": "Simple Node frontend/healthcheck for Employee system - 25RP18224-nzayisenga",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7"
+  }
+}

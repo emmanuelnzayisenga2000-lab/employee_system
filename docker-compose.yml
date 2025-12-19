@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  employee-api:
+    build: ./services/employee-api
+    image: employee-api:25rp18224-nzayisenga
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+  index:
+    build: .
+    image: employee-index:25rp18224-nzayisenga
+    ports:
+      - "8080:8080"
+    environment:
+      - EMPLOYEE_API_URL=http://employee-api:5000
+    depends_on:
+      - employee-api
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  grafana:
+    image: grafana/grafana:9.5.9
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
