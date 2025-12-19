@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: employee-api
-        image: employee-api:25rp18224-nzayisenga
+        image: employee-api:25RP18224-nzayisenga
         ports:
         - containerPort: 5000
         env:
@@ -40,6 +40,14 @@ spec:
             port: 5000
           initialDelaySeconds: 5
           periodSeconds: 10
+        volumeMounts:
+        - name: data
+          mountPath: /data
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: employee-api-pvc
 ---
 apiVersion: v1
 kind: Service

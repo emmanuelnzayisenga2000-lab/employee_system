@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: employee-api
-  TAG: 25rp18224-nzayisenga
+  TAG: 25RP18224-nzayisenga
   # Default registry is GHCR; override with workflow or repository secrets if you prefer Docker Hub
   REGISTRY: ghcr.io
 

@@ -2,13 +2,15 @@ version: '3.8'
 services:
   employee-api:
     build: ./services/employee-api
-    image: employee-api:25rp18224-nzayisenga
+    image: employee-api:25RP18224-nzayisenga
     ports:
       - "5000:5000"
     restart: unless-stopped
+    volumes:
+      - ./services/employee-api/data:/data
   index:
-    build: .
-    image: employee-index:25rp18224-nzayisenga
+    build: ./services/index
+    image: employee-index:25RP18224-nzayisenga
     ports:
       - "8080:8080"
     environment:

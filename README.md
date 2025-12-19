@@ -20,11 +20,11 @@ Quick start (local using docker-compose)
 
 1. Build image:
 
-   docker build -t employee-api:25rp18224-nzayisenga ./services/employee-api
+   docker build -t employee-api:25RP18224-nzayisenga ./services/employee-api
 
 2. Run the app:
 
-   docker run -p 5000:5000 employee-api:25rp18224-nzayisenga
+   docker run -p 5000:5000 employee-api:25RP18224-nzayisenga
 
 API
 
