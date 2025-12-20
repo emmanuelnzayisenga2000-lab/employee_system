@@ -11,6 +11,8 @@ jobs:
     name: Python Tests (employee-api)
     runs-on: ubuntu-latest
     steps:
+      env:
+        PYTHONPATH: services/employee-api
       - uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -23,7 +25,9 @@ jobs:
       - name: Run pytest
         working-directory: services/employee-api
         run: |
-          PYTHONPATH=. pytest -q tests
+          pytest -q tests
+        env:
+          PYTHONPATH: .
 
   node-check:
     name: Node Syntax Check (index)
