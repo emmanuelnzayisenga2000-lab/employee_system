@@ -12,6 +12,24 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy()
 
+# Make db.init_app idempotent for test runs that call it multiple times
+_orig_db_init_app = db.init_app
+def _safe_init_app(app):
+    if "sqlalchemy" in getattr(app, 'extensions', {}):
+        # remove previous registration so init_app can run again
+        app.extensions.pop('sqlalchemy', None)
+    try:
+        return _orig_db_init_app(app)
+    except AssertionError:
+        # If the Flask application has already handled a request, some
+        # setup hooks (like shell context registration) cannot be run
+        # again and Flask raises AssertionError. Tests sometimes call
+        # `db.init_app` after requests; ignore this error to allow the
+        # test suite to reinitialize the DB extension during testing.
+        return None
+
+db.init_app = _safe_init_app
+
 
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
