@@ -21,7 +21,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r services/employee-api/requirements.txt
       - name: Run pytest
-        run: pytest -q services/employee-api/tests
+        working-directory: services/employee-api
+        run: pytest -q tests
 
   node-check:
     name: Node Syntax Check (index)
