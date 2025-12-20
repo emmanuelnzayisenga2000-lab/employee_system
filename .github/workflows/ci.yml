@@ -22,7 +22,8 @@ jobs:
           pip install -r services/employee-api/requirements.txt
       - name: Run pytest
         working-directory: services/employee-api
-        run: pytest -q tests
+        run: |
+          PYTHONPATH=. pytest -q tests
 
   node-check:
     name: Node Syntax Check (index)
