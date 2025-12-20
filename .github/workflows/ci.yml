@@ -33,7 +33,12 @@ jobs:
         with:
           node-version: '18'
       - name: Install Node dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            npm ci
+          else
+            npm install
+          fi
         working-directory: services/index
       - name: Syntax check index.js
         run: node --check services/index/index.js
