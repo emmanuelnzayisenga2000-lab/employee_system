@@ -10,7 +10,7 @@ DB_PATH = os.environ.get('EMPLOYEE_DB_PATH', 'employees.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
 class Employee(db.Model):
@@ -62,6 +62,8 @@ def add_employee():
 
 
 if __name__ == '__main__':
+    # Initialize the DB extension for standalone run
+    db.init_app(app)
     init_db()
     app.run(host='0.0.0.0', port=5000, debug=True)
 
