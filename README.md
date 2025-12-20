@@ -26,6 +26,16 @@ Quick start (local using docker-compose)
 
    docker run -p 5000:5000 employee-api:25RP18224-nzayisenga
 
+Run tests (local)
+
+- Node syntax check and Python tests (runs Docker):
+
+   ```bash
+   npm test
+   ```
+
+This will perform a Node syntax check for `services/index` and then build the `employee-api` image and run the service unit tests inside a container. Docker must be available on your machine for `npm test` to run the Python tests.
+
 API
 
 - GET /employees - list employees

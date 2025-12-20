@@ -4,7 +4,8 @@
   "description": "Simple Node frontend/healthcheck for Employee system - 25RP18224-nzayisenga",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node --check services/index/index.js && docker build -t employee-api:test ./services/employee-api && docker run --rm -e PYTHONPATH=. employee-api:test python -m pytest -q tests"
   },
   "dependencies": {
     "express": "^4.18.2",

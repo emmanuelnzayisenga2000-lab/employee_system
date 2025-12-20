@@ -5,6 +5,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+env:
+  DEVOPS_ID: 25RP18224-nzayisenga
 
 jobs:
   python-tests:
@@ -72,14 +74,14 @@ jobs:
           context: ./services/employee-api
           file: ./services/employee-api/Dockerfile
           push: false
-          tags: employee-api:latest
+          tags: employee-api:${{ env.DEVOPS_ID }}
       - name: Build index image
         uses: docker/build-push-action@v4
         with:
           context: ./services/index
           file: ./services/index/Dockerfile
           push: false
-          tags: employee-index:latest
+          tags: employee-index:${{ env.DEVOPS_ID }}
       - name: Push hint
         run: |
           echo "Images are built locally in the runner. To push to Docker Hub set secrets DOCKERHUB_USERNAME and DOCKERHUB_TOKEN and update the workflow to enable push."
