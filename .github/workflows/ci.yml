@@ -11,7 +11,7 @@ jobs:
     name: Python Tests (employee-api)
     runs-on: ubuntu-latest
     env:
-      PYTHONPATH: services/employee-api
+      PYTHONPATH: ${{ github.workspace }}/services/employee-api
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
@@ -24,8 +24,10 @@ jobs:
           pip install -r services/employee-api/requirements.txt
       - name: Run pytest
         working-directory: services/employee-api
+        env:
+          PYTHONPATH: ${{ github.workspace }}/services/employee-api
         run: |
-          pytest -q tests
+          python -m pytest -q tests
 
   node-check:
     name: Node Syntax Check (index)
