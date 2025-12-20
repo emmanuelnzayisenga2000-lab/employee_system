@@ -36,6 +36,22 @@ Run tests (local)
 
 This will perform a Node syntax check for `services/index` and then build the `employee-api` image and run the service unit tests inside a container. Docker must be available on your machine for `npm test` to run the Python tests.
 
+CI Image Push (Docker Hub)
+
+To enable the workflow to push Docker images to Docker Hub you must add these repository secrets in GitHub:
+
+- `DOCKERHUB_USERNAME` — your Docker Hub username
+- `DOCKERHUB_TOKEN` — a Docker Hub access token (or password)
+
+Once those are set the CI will push images as:
+
+```
+<dockerhub-username>/employee-api:25RP18224-nzayisenga
+<dockerhub-username>/employee-index:25RP18224-nzayisenga
+```
+
+Enable those secrets at: `Settings -> Secrets and variables -> Actions` for your repository.
+
 API
 
 - GET /employees - list employees
